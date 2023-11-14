@@ -8,19 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\**" />
+    <Compile Remove="Views\CategoriaMenu\**" />
     <Compile Remove="Views\Shared\Components\CarrinhoCompraResumo\**" />
-    <Content Remove="Areas\**" />
+    <Content Remove="Views\CategoriaMenu\**" />
     <Content Remove="Views\Shared\Components\CarrinhoCompraResumo\**" />
-    <EmbeddedResource Remove="Areas\**" />
+    <EmbeddedResource Remove="Views\CategoriaMenu\**" />
     <EmbeddedResource Remove="Views\Shared\Components\CarrinhoCompraResumo\**" />
-    <None Remove="Areas\**" />
+    <None Remove="Views\CategoriaMenu\**" />
     <None Remove="Views\Shared\Components\CarrinhoCompraResumo\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Components\CarrinhoCompraResumo.cs" />
-    <Compile Remove="Models\LogoutViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,11 +27,9 @@
     <Content Remove="Views\Products\DeleteProduct.cshtml" />
     <Content Remove="Views\Products\Index.cshtml" />
     <Content Remove="Views\Products\UpdateProduct.cshtml" />
-    <Content Remove="Views\Shared\_LoginAdmin.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\CategoriaMenu\Default.cshtml" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
@@ -76,9 +73,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.3.6" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.22" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.22" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.22" />
@@ -87,14 +82,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.22" />
-    <PackageReference Include="Microsoft.Identity.Web" Version="2.15.3" />
-    <PackageReference Include="Microsoft.Identity.Web.UI" Version="2.15.3" />
     <PackageReference Include="ReflectionIT.Mvc.Paging" Version="6.0.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="6.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.0" />
   </ItemGroup>
 
 </Project>
