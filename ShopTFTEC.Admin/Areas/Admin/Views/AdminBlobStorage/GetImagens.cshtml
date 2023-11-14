@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Arquivos";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+
+    <div class="jumbotron">
+        <h2>Galeria do Azure Blob Storage</h2>
+        <h5>Nessa área você armazena as imagens da TFTEC Store no Blob</h5>
+    </div>
+    <div class="row">
+        @if (Model != null && Model.Count > 0)
+        {
+
+            foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="imageBlock">
+                        <a href="@item" target="_blank"><img width="125" height="125" class="thumb" src="@item" alt="images" /></a><br />
+                        <div class="deleteDiv"><img class="deleteIcon" src="~/images/delete.png" width="32" height="32" title="Delete Image" onclick="deleteImage('@item');" /></div>
+                    </div>
+                </div>
+            }
+
+            @*        using (Html.BeginForm("DeleteAll", "AdminBlobStorage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    <div class="fileUpload btn btn-default"><span>Delete All Files</span><input type="submit" name="deleteAll" class="upload" /></div>
+    }*@
+        }
+    </div>
+    <script>
+        function deleteImage(item) {
+        var url = "/Admin/AdminBlobStorage/DeleteImage";
+        $.post(url, { Name: item }, function (data) {
+        window.location.href = "/Admin/AdminBlobStorage/GetImagens";
+        });
+        }
+
+        function DisplayFilesToUpload() {
+        var element = document.getElementById("file");
+        var html = "";
+
+        html = "<h3>Image(s) to Upload</h3>"
+        for (var i = 0; i < element.files.length; i++) {
+        html += "<strong>" + (i + 1) + "</strong>. File: ";
+        var file = element.files[i];
+        if ('name' in file) { html += file.name + " ("; }
+        if ('size' in file) { html += "size: " + file.size + " bytes)<br>"; }
+        }
+        html += "<div class='fileUpload btn btn-default'><span>Upload</span><input type='submit' class='upload' value='Upload'/></div>"
+        document.getElementById("FilesToUpload").innerHTML = html;
+        }
+
+    </script>
+}

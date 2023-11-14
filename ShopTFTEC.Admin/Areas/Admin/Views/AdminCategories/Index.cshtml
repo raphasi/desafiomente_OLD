@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CategoryViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <h1>Categorias</h1>
+
+    <p>
+        <a asp-action="Create">Criar Nova Categoria</a>
+    </p>
+}
+<table class="table table-hover" ">
+    @if (User.Identity.IsAuthenticated)
+{
+    <thead>
+        <tr>
+            <th>
+@Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+}
+    <tbody>
+        @if (User.Identity.IsAuthenticated)
+{
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <form asp-action="Edit" asp-route-id="@item.CategoryId" method="get">
+                    <button type="submit" class="btn btn-warning">
+                        Editar Categoria
+                    </button>
+                </form>
+                <form asp-action="Delete" asp-route-id="@item.CategoryId" method="get">
+                    <button type="submit" class="btn btn-danger">
+                        Excluir Categoria
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+}
+</tbody>
+</table>
