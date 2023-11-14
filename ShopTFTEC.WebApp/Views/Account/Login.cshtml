@@ -1,17 +1,29 @@
-﻿<ul class="navbar-nav">
-    @if (User.Identity.IsAuthenticated)
-    {
-        <li class="nav-item">
-            <a class="nav-link" href="#">Olá, @User.Identity.Name</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" asp-action="Logout" asp-controller="Home">Logout</a>
-        </li>
-    }
-    else
-    {
-        <li class="nav-item">
-            <a class="nav-link" asp-action="Login" asp-controller="Home">Login</a>
-        </li>
-    }
-</ul>
+﻿@model LoginViewModel
+
+@if (Model.VisibleExternalProviders.Any())
+{
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <h2>Autenticação Azure B2c</h2>
+            </div>
+            <div class="card-body">
+                <ul class="list-inline">
+                    @foreach (var provider in Model.VisibleExternalProviders)
+                    {
+                        <li class="list-inline-item">
+                            <a class="btn btn-secondary"
+                               asp-controller="External"
+                               asp-action="Challenge"
+                               asp-route-scheme="@provider.AuthenticationScheme"
+                               asp-route-returnUrl="@Model.ReturnUrl">
+                                @provider.DisplayName
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+    </div>
+}
