@@ -45,7 +45,7 @@ namespace ShopTFTEC.WebApp.Controllers
                         }
                     }
 
-                    return View("~/Views/Cart/CheckoutCompleted.cshtml", cartVM);
+                    return View("~/Views/Cart/CheckoutCompleted.cshtml", getCar);
                 }
             }
             return View(cartVM);
