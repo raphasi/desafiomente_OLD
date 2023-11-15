@@ -8,13 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\**" />
     <Compile Remove="Views\Shared\Components\CarrinhoCompraResumo\**" />
-    <Content Remove="Areas\**" />
     <Content Remove="Views\Shared\Components\CarrinhoCompraResumo\**" />
-    <EmbeddedResource Remove="Areas\**" />
     <EmbeddedResource Remove="Views\Shared\Components\CarrinhoCompraResumo\**" />
-    <None Remove="Areas\**" />
     <None Remove="Views\Shared\Components\CarrinhoCompraResumo\**" />
   </ItemGroup>
 
@@ -91,10 +87,6 @@
     <PackageReference Include="Microsoft.Identity.Web.UI" Version="2.15.3" />
     <PackageReference Include="ReflectionIT.Mvc.Paging" Version="6.0.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="6.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\" />
   </ItemGroup>
 
 </Project>

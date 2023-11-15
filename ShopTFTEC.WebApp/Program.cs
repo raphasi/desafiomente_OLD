@@ -20,22 +20,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
-//builder.Services.AddAuthentication(options =>
-//{
-//    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-//})
-//.AddOpenIdConnect("aad" , options =>
-//{
-//    options.SignInScheme = IdentityConstants.ExternalScheme;
-//    options.Authority = builder.Configuration["AzureAd:Authority"];
-//    options.ClientId = builder.Configuration["AzureAd:Authority"];
-//    options.ResponseType = "code";
-//    options.SaveTokens = true;
-//    options.ClientSecret = builder.Configuration["AzureAd:Authority"];
-//    options.CallbackPath = new PathString("/signin-oidc-b2c");
-//    options.SignedOutCallbackPath = new PathString("/signout-oidc-b2c");
-//});
-
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -75,13 +59,23 @@ builder.Services.AddAuthentication()
         options.ResponseType = OpenIdConnectResponseType.IdToken;
         options.CallbackPath = new PathString("/signin-oidc-b2c");
         options.SignedOutCallbackPath = new PathString("/signout-oidc-b2c");
-        options.RemoteSignOutPath = "/signout-oidc-b2c";
+        options.RemoteSignOutPath = new PathString("/signout-oidc-b2c");
         options.ClaimActions.MapJsonKey("role", "role", "role");
         options.ClaimActions.MapJsonKey("sub", "sub", "sub");
         options.TokenValidationParameters = new TokenValidationParameters
         {
             NameClaimType = "name",
             RoleClaimType = "role",
+        };
+        options.Events = new OpenIdConnectEvents
+        {
+            OnRemoteFailure = context =>
+            {
+                context.Response.Redirect("/");
+                context.HandleResponse();
+
+                return Task.FromResult(0);
+            }
         };
         options.SaveTokens = true;
     });
@@ -138,8 +132,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Account/Error");
     app.UseHsts();
 }
-else
-    app.UseExceptionHandler("/Error");
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
@@ -147,10 +140,6 @@ app.UseRouting();
 app.UseIdentityServer();
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "MinhaArea",
-    pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

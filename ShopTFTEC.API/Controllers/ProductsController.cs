@@ -51,7 +51,6 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPut]
-    [Authorize(Roles = "AdminApi")]
     public async Task<ActionResult<ProductDTO>> Put([FromBody] ProductDTO produtoDto)
     {
         if (produtoDto == null)

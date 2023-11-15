@@ -9,7 +9,6 @@ using System.Collections.Generic;
 
 namespace ShopTFTEC.WebApp.Controllers;
 
-[Authorize(Roles = Role.Admin)]
 public class ProductsController : Controller
 {
     private readonly IProductService _productService;

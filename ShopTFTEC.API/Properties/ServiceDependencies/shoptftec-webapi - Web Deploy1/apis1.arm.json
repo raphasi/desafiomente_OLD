@@ -106,7 +106,7 @@
                 "description": null,
                 "subscriptionRequired": true,
                 "serviceUrl": null,
-                "path": "ShopTFTEC",
+                "path": "shopapi",
                 "protocols": [
                   "https"
                 ],
