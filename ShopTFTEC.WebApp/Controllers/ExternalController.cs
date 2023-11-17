@@ -212,7 +212,7 @@ namespace IdentityServerHost.Quickstart.UI
 
             // email
             var email = claims.FirstOrDefault(x => x.Type == JwtClaimTypes.PreferredUserName)?.Value ??
-               claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+               claims.FirstOrDefault(x => x.Type == "emails")?.Value;
             if (email != null)
             {
                 filtered.Add(new Claim(JwtClaimTypes.Email, email));
@@ -227,7 +227,7 @@ namespace IdentityServerHost.Quickstart.UI
 
             if (filtered.Any())
             {
-                //inclui o usu·rio admin ao perfil admin
+                //inclui o usu√°rio admin ao perfil admin
                 identityResult = await _userManager.AddToRoleAsync(user, "Cliente");
                 if (!identityResult.Succeeded) throw new Exception(identityResult.Errors.First().Description);
 
